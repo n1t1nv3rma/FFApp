@@ -1,0 +1,28 @@
+import {Injectable, Inject} from '@angular/core';
+import {Http, Headers, RequestOptions} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
+
+@Injectable()
+export class ListService {
+    static get parameters() {
+        return [[Http]];
+    }
+    apiKey: String = "";
+    placelistUrl: String = "";
+
+    constructor(private http: Http){
+        console.log('Service connected...');
+        this.http = http;
+        this.apiKey = 'Puq-dedW5BFQ6DWqjwftidlcpJB3EYAV';
+        this.placelistUrl = 'https://api.mlab.com/api/1/databases/myworkapp/collections/placelist';
+    }
+
+    getList(){
+        
+        return this.http.get(this.placelistUrl+'?apiKey='+this.apiKey)
+            .map(res => res.json());
+    }
+
+
+}

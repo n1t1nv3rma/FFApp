@@ -1,0 +1,35 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams} from 'ionic-angular';
+import {ListService} from '../../services/list.service';
+
+/*
+  Generated class for the List page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+@Component({
+  selector: 'page-list',
+  templateUrl: 'list.html',
+  providers: [ListService]
+})
+export class ListPage {
+   places: Array<any>;
+  constructor(private navCtrl: NavController, private listService: ListService) {
+     }
+  
+  ngOnInit(){
+        this.listService.getList().subscribe(data => {
+            this.places = data;
+            console.log(data);
+        });
+       
+    }
+
+  ionViewDidLoad() {
+    console.log('Hello ListPage Page');
+  }
+}
+
+
+

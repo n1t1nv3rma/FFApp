@@ -7,12 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>list-favourite</ion-title>
+    <ion-title>Welcome to AU</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <p>
+      Here are your favourite places:
+    </p>
+    <ion-list>
+    <button ion-item *ngFor="let place of places" (click)="itemTapped($event, place)">
+      <h2>{{place.Name}}</h2>
+      <h3>{{place.Contact}}</h3>
+    </button>  
+  </ion-list>
 </ion-content>

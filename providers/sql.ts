@@ -26,7 +26,7 @@ constructor(private platform: Platform) {
 }
     // Initialize the DB with our required tables
     _tryInit() {
-        this.query('CREATE TABLE IF NOT EXISTS kv1 (key text primary key, value text)').catch(err => {
+        this.query('CREATE TABLE IF NOT EXISTS kv (key text primary key, value text)').catch(err => {
             console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
         });
     }

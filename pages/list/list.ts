@@ -25,13 +25,10 @@ export class ListPage {
             this.places = data;
             console.log(data);
         });
-
-        this.sql.set('mylist', 'testlist');
-
-        this.sql.get('mylist').then((val) => {
-        console.log('My Value is' + val);
-     })
-       
+        //this.sql.set('mylist', 'testlist');
+        //this.sql.get('mylist').then((val) => {
+        //console.log('My Value is' + val);
+        //})  
     }
   searchPlaces(event) {
      if(event.target.value.length > 3) {
@@ -45,6 +42,12 @@ export class ListPage {
                 },
                 () => console.log('Place Search Complete')
             );
+      }
+     if(event.target.value.length < 1) {
+            this.listService.getList().subscribe(data => {
+            this.places = data;
+            console.log('Loading initial view again...');
+        });
       }
     } 
    

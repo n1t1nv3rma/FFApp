@@ -19,13 +19,23 @@
             <strong>{{place.Name}}</strong>
         </ion-card-header>
         <ion-card-content>
+          <p><strong>Address1: </strong> {{place.Address1}}</p>
+          <p><strong>Address2: </strong> {{place.Address2}}</p>
+          <p><strong>Suburb: </strong> {{place.Suburb}}</p>
+          <p><strong>State: </strong> {{place.State}}</p>
+          <p><strong>Post Code: </strong> {{place.Pin}}</p>
           <p><strong>Contact: </strong> {{place.Contact}}</p>
-          <p><strong>Post Code: </strong> {{place.PIN}}</p>
-          <br><br><br>
-          <button class="button button-block button-positive" (click)="deletePlce(place._id.$oid)">
-            Delete Place
-          </button>
-  
+          <p><strong>URL: </strong> {{place.URL}}</p>
+          <p><strong>Service Hours: </strong></p>
+          <p><strong>Monday: </strong> {{place.Days.Monday}}</p>
+          <p><strong>Tuesday: </strong> {{place.Days.Tuesday}}</p>
+          <p><strong>Wednesday: </strong> {{place.Days.Wednesday}}</p>
+          <p><strong>Thursday: </strong> {{place.Days.Thursday}}</p>
+          <p><strong>Friday: </strong> {{place.Days.Friday}}</p>
+          <p><strong>Saturday: </strong> {{place.Days.Saturday}}</p>
+          <p><strong>Sunday: </strong> {{place.Days.Sunday}}</p>
+          <hr>
+          <button ion-button full (click)="addFavour(place._id.$oid, place)"> Add to Favourites</button>
         </ion-card-content>
     </ion-card>
 </ion-content>

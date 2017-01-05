@@ -7,31 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>list</ion-title>
+    <ion-title>Welcome to AU</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <h2>Welcome to AU</h2>
-  <p>
-    Please find below list of places where you can find in Australia.
-  </p>
-  <ion-item>
-      <div class="list list-inset">
-        <label class="item item-input">
-          <i class="icon ion-search placeholder-icon"></i>
-          <input type="text" placeholder="Enter post code. Ex: 2000" (input)="searchPlaces($event)">
-        </label>
-      </div>
-
-    </ion-item>
-     
-    <ion-list>    
-        <ion-item *ngFor="let place of places" (click)="itemTapped($event, place)">
-            <h2>{{place.Name}}</h2>
-            <h3>{{place.Contact}}</h3>
-        </ion-item>
-    </ion-list>
+    <p>
+      Please find below list of places where you can find in Australia. Search using 4-digits Post Code, ex: 2000
+    </p>
+    <ion-searchbar (ionInput)="searchPlaces($event)"></ion-searchbar>
+    <ion-list>
+    <button ion-item *ngFor="let place of places" (click)="itemTapped($event, place)">
+      <h2>{{place.Name}}</h2>
+      <h3>{{place.Contact}}</h3>
+    </button>  
+  </ion-list>
 </ion-content>

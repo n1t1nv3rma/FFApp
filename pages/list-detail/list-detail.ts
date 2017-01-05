@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {ListService} from '../../services/list.service';
-import {ListPage} from '../list/list';
-import { Sql } from '../../providers/sql';
+import {ListFavouritePage} from '../list-favourite/list-favourite';
 
 @Component({
   selector: 'page-list-detail',
@@ -23,13 +22,9 @@ export class ListDetailPage {
         console.log('detailed info:' + this.place);
     }
     
-    deletePlce(placeId){
-       this.listService.deletePlace(placeId).subscribe(data => {
-           this.result = data
-       },
-       err => console.log(err),
-       () => console.log('Place Deleted'));
-       
-       this.nav.setRoot(ListPage);
+    addFavour(placeId, place){
+       this.listService.addFavourPlace(placeId, place);
+       console.log('Place added to Favourite...');
+       this.nav.setRoot(ListFavouritePage);
     }
 }

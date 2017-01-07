@@ -23,18 +23,14 @@ export class ListFavouritePage {
         .then(
           (data) => {
             console.log(data);
-            // var templaces: Array<Object> = [];
             if(data.res.rows.length > 0) {
                for(let i = 0; i < data.res.rows.length; i++) {
                   var place = JSON.parse(data.res.rows.item(i).value);
                   console.log(place);
                   this.places.push(place);
-              /*    (place) => {
-                    templaces.push(place)};
+  
                }
-               */
-               }
-               //this.places = templaces;
+
                console.log(this.places);
             };
             

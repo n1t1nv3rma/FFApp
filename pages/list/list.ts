@@ -17,6 +17,7 @@ import { Sql } from '../../providers/sql';
 })
 export class ListPage {
    places: Array<any>;
+   nearbyzips: Array<any> = [];
   constructor(private navCtrl: NavController, private listService: ListService, private sql: Sql) {
      }
   
@@ -30,6 +31,8 @@ export class ListPage {
         //console.log('My Value is' + val);
         //})  
     }
+
+  /*
   searchPlaces(event) {
      if(event.target.value.length > 3) {
             this.listService.searchPlace(event.target.value).subscribe(
@@ -42,6 +45,58 @@ export class ListPage {
                 },
                 () => console.log('Place Search Complete')
             );
+      }
+     if(event.target.value.length < 1) {
+            this.listService.getList().subscribe(data => {
+            this.places = data;
+            console.log('Loading initial view again...');
+        });
+      }
+    }
+    */
+
+    searchNearbyZip(event) {
+     if(event.target.value.length > 3) {
+            var pin = event.target.value;
+            this.listService.searchNearbyZip(event.target.value)
+            .subscribe(
+                data => {
+
+                 if(data.postalCodes != undefined){
+                    this.nearbyzips = [];
+                    //console.log(data.postalCodes);
+                    var len = data.postalCodes.length;
+                    if(len > 0) {
+                        for(let i = 0; i < len; i++) {
+                        var zip = JSON.parse(data.postalCodes[i].postalCode);
+                        this.nearbyzips.push(zip);
+                     }    
+                      console.log(this.nearbyzips);
+                      () => console.log('Zip Search Complete')
+                    }
+
+                    this.listService.searchPlace(pin, this.nearbyzips).subscribe(
+                        data => {
+                            this.places = data; 
+                            console.log(this.places);
+                        },
+                        err => {
+                            console.log(err);
+                        },
+                        () => console.log('Place Search Complete')
+                    );
+
+                  } // if end here
+                  else {
+                    this.places = [{"Name": "Bad Pin Code. Try again!"}] ;
+                  }
+                },
+                err => {
+                    console.log(err);
+                },
+                () => console.log('Zip Search Complete')
+            )
+          
       }
      if(event.target.value.length < 1) {
             this.listService.getList().subscribe(data => {

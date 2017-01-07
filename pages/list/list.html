@@ -17,7 +17,7 @@
     <p>
       Please find below list of places where you can find in Australia. Search using 4-digits Post Code, ex: 2000
     </p>
-    <ion-searchbar (ionInput)="searchPlaces($event)"></ion-searchbar>
+    <ion-searchbar (ionInput)="searchNearbyZip($event)"></ion-searchbar>
     <ion-list>
     <button ion-item *ngFor="let place of places" (click)="itemTapped($event, place)">
       <h2>{{place.Name}}</h2>

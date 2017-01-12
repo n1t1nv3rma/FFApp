@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams} from 'ionic-angular';
+import { NavController} from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 import {ListService} from '../../services/list.service';
 import {ListDetailPage} from '../list-detail/list-detail';
 import { Sql } from '../../providers/sql';
+import { ConnectivityService } from '../../providers/connectivity-service';
 
 /*
   Generated class for the List page.
@@ -18,18 +20,54 @@ import { Sql } from '../../providers/sql';
 export class ListPage {
    places: Array<any>;
    nearbyzips: Array<any> = [];
-  constructor(private navCtrl: NavController, private listService: ListService, private sql: Sql) {
+  constructor(
+      private navCtrl: NavController,
+      public loadingCtrl: LoadingController, 
+      private listService: ListService, 
+      private sql: Sql, 
+      public networkService: ConnectivityService) {
      }
   
   ngOnInit(){
-        this.listService.getList().subscribe(data => {
-            this.places = data;
-            console.log(data);
-        });
-        //this.sql.set('mylist', 'testlist');
+         
+      if(this.networkService.isOnline()){
+        console.log("Fetching data online...");
+        this.presentLoading();
+        this.fetchListOnline();
+     }
+    else {
+        console.log("Network unavailable. Fetching data offline...");
+        this.fetchListOffline();
+    }
+
+     //this.sql.set('mylist', 'testlist');
         //this.sql.get('mylist').then((val) => {
         //console.log('My Value is' + val);
         //})  
+
+  }
+
+    presentLoading(){
+        let loader = this.loadingCtrl.create({
+            content: "Fetching latest data...",
+            dismissOnPageChange: true,
+            duration: 3000
+        });
+        loader.present();
+    };
+
+    fetchListOnline() {
+
+     this.listService.getList().subscribe(data => {
+            this.places = data;
+            console.log(data);
+        });
+    }
+
+
+    fetchListOffline() {
+            this.places = [{"Name": "Netowrk not available. Try again!"}] ;
+
     }
 
   /*
@@ -109,7 +147,7 @@ export class ListPage {
     itemTapped(event, place) {
         console.log(place);  
         this.navCtrl.push(ListDetailPage, {
-            place: place
+            place: place            
         });
     }
 

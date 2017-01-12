@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { ConnectivityService } from '../providers/connectivity-service';
 import { Sql } from '../providers/sql';
 import { MyApp } from './app.component';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -9,6 +10,7 @@ import { ListDetailPage } from '../pages/list-detail/list-detail';
 // import { AddListPage } from '../pages/add-list/add-list';
 import { ListFavouritePage } from '../pages/list-favourite/list-favourite';
 import { ListBirthdayPage } from '../pages/list-birthday/list-birthday';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { ListBirthdayPage } from '../pages/list-birthday/list-birthday';
     ListBirthdayPage
   ],
   providers: [
-    Sql,
+    Sql, 
+    ConnectivityService, 
     {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })

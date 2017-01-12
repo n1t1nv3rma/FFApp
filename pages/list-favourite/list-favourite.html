@@ -18,9 +18,17 @@
       Here are your favourite places:
     </p>
     <ion-list>
+    <ion-item-sliding>
     <button ion-item *ngFor="let place of places" (click)="itemTapped($event, place)">
       <h2>{{place.Name}}</h2>
       <h3>{{place.Contact}}</h3>
+        <ion-item-options side="left">
+          <button ion-button color="danger">
+            <ion-icon name="Delete"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
     </button>  
+     </ion-item-sliding>
   </ion-list>
 </ion-content>

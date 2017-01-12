@@ -35,7 +35,8 @@
           <p><strong>Saturday: </strong> {{place.Days.Saturday}}</p>
           <p><strong>Sunday: </strong> {{place.Days.Sunday}}</p>
           <hr>
-          <button ion-button full (click)="addFavour(place._id.$oid, place)"> Add to Favourites</button>
+          <button ion-button block *ngIf="hideFavButton" (click)="addFavour(place._id.$oid, place)"> Add to Favourites</button>
+          <button ion-button block *ngIf="showDelButton" (click)="delFavour(place._id.$oid, place)"> Remove from Favourites</button>
         </ion-card-content>
     </ion-card>
 </ion-content>

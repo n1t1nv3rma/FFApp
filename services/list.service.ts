@@ -73,4 +73,13 @@ export class ListService {
        console.log ('Add Executed...');
     }
 
+    delFavourPlace(placeId){
+         console.log('Removing:' + placeId);
+        // Set Place
+        var favourite_key = placeId;
+        
+       this.sql.remove(favourite_key);
+       console.log ('Remove Executed...');
+    }
+
 }

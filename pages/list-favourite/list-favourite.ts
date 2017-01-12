@@ -28,9 +28,7 @@ export class ListFavouritePage {
                   var place = JSON.parse(data.res.rows.item(i).value);
                   console.log(place);
                   this.places.push(place);
-  
                }
-
                console.log(this.places);
             };
             
@@ -40,6 +38,15 @@ export class ListFavouritePage {
               console.error('Error:' + error);
           });
   }
+
+  itemTapped(event, place) {
+        console.log('Item tap from list fav:' + place);  
+        this.navCtrl.push(ListDetailPage, {
+            place: place,
+            delButton: true,
+            hideFavButton: false,
+        });
+    }
 
   ionViewDidLoad() {
   

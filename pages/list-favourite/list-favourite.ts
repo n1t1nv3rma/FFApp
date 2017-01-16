@@ -18,8 +18,12 @@ export class ListFavouritePage {
   }
 
   ngOnInit(){
-      this.places = [];
-       this.sql.query("SELECT value FROM kv", [])
+    this.getFavData();
+  }
+
+  getFavData() {
+    this.places = [];
+       this.sql.query("SELECT value FROM kv_fav", [])
         .then(
           (data) => {
             console.log(data);
@@ -43,13 +47,12 @@ export class ListFavouritePage {
         console.log('Item tap from list fav:' + place);  
         this.navCtrl.push(ListDetailPage, {
             place: place,
-            delButton: true,
-            hideFavButton: false,
+            showFavButton: false,
+            showDelButton: true
         });
     }
 
   ionViewDidLoad() {
-  
   }
 
 }

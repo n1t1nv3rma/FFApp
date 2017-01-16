@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import {ListService} from '../../services/list.service';
 import {ListFavouritePage} from '../list-favourite/list-favourite';
 
@@ -12,17 +13,17 @@ import {ListFavouritePage} from '../list-favourite/list-favourite';
 export class ListDetailPage {
     
     place: any;
-    hideFavButton: Boolean = true;
-    showDelButton: Boolean = false;
+    showFavButton: Boolean;
+    showDelButton: Boolean;
 
-    constructor(private nav: NavController, private navParams: NavParams, private listService: ListService) {
+    constructor(private nav: NavController, private navParams: NavParams, private listService: ListService, public alertCtrl: AlertController) {
         this.listService = listService;
         this.nav = nav;
         this.navParams = navParams;
         this.place = this.navParams.get('place');
-        this.hideFavButton = this.navParams.get('hideFavButton');
-        this.showDelButton = this.navParams.get('delButton');
-        console.log('Show Fav button:' + this.hideFavButton);
+        this.showFavButton = this.navParams.get('showFavButton');
+        this.showDelButton = this.navParams.get('showDelButton');
+        console.log('Show Fav button:' + this.showFavButton);
         console.log('Show Del button:' + this.showDelButton);
         console.log('detailed info:' + JSON.stringify(this.place));
     }
@@ -30,7 +31,25 @@ export class ListDetailPage {
     addFavour(placeId, place){
        this.listService.addFavourPlace(placeId, place);
        console.log('Place added to Favourite...');
-       this.nav.setRoot(ListFavouritePage);
+       
+        let alert = this.alertCtrl.create({
+            title: 'Added to favourites',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                // user has clicked the alert button
+                // begin the alert's dismiss transition
+                let navTransition = alert.dismiss();
+
+                    navTransition.then(() => {
+                    this.nav.pop();
+                    });
+                return false;
+                }
+            }]
+            });
+            alert.present();
+
     }
 
     delFavour(placeId){

@@ -20,7 +20,7 @@ constructor(private platform: Platform) {
    });
   } else {
    console.warn('Storage: SQLite plugin not installed, falling back to WebSQL. Make sure to install cordova-sqlite-storage in production!');
-   this._db = win.openDatabase(DB_NAME, '1.0', 'database', 5 * 1024 * 1024);
+   this._db = win.openDatabase(DB_NAME, '1.0', 'database', 10 * 1024 * 1024);
    this._tryInit();
   }
 }
@@ -28,6 +28,10 @@ constructor(private platform: Platform) {
     _tryInit() {
         this.query('CREATE TABLE IF NOT EXISTS kv (key text primary key, value text)').catch(err => {
             console.error('Storage: Unable to create initial storage tables', err.tx, err.err);
+        });
+
+        this.query('CREATE TABLE IF NOT EXISTS kv_fav (key text primary key, value text)').catch(err => {
+            console.error('Storage: Unable to create initial Fav storage tables', err.tx, err.err);
         });
     }
 
@@ -68,14 +72,22 @@ constructor(private platform: Platform) {
         });
     }
 
+    getFav(key: string): Promise<any> {
+        return this.query('select key, value from kv_fav where key = ? limit 1', [key]).then(data => {
+            if (data.res.rows.length > 0) {
+                return data.res.rows.item(0).value;
+            }
+        });
+    }
+
     /**
      * Set the value in the database for the given key. Existing values will be overwritten.
      * @param {string} key the key
      * @param {string} value The value (as a string)
      * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
      */
-    set(key: string, value: string): Promise<any> {
-        return this.query('insert or replace into kv(key, value) values (?, ?)', [key, value]);
+    setFav(key: string, value: string): Promise<any> {
+        return this.query('insert or replace into kv_fav(key, value) values (?, ?)', [key, value]);
     }
 
     /**
@@ -83,15 +95,15 @@ constructor(private platform: Platform) {
      * @param {string} key the key
      * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
      */
-    remove(key: string): Promise<any> {
-        return this.query('delete from kv where key = ?', [key]);
+    removeFav(key: string): Promise<any> {
+        return this.query('delete from kv_fav where key = ?', [key]);
     }
 
     /**
      * Clear all keys/values of your database.
      * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
      */
-    clear(): Promise<any> {
-        return this.query('delete from kv');
+    clearFav(): Promise<any> {
+        return this.query('delete from kv_fav');
     }
 }

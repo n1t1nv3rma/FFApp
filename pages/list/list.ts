@@ -29,22 +29,19 @@ export class ListPage {
      }
   
   ngOnInit(){
-         
-      if(this.networkService.isOnline()){
+
+    if(this.networkService.isOnline()){
         console.log("Fetching data online...");
-        this.presentLoading();
         this.fetchListOnline();
      }
     else {
         console.log("Network unavailable. Fetching data offline...");
         this.fetchListOffline();
     }
-
      //this.sql.set('mylist', 'testlist');
         //this.sql.get('mylist').then((val) => {
         //console.log('My Value is' + val);
-        //})  
-
+        //})
   }
 
     presentLoading(){
@@ -56,12 +53,28 @@ export class ListPage {
         loader.present();
     };
 
+    /* doRefresh(refresher) {
+        console.log('Begin async refresh operation', refresher);
+
+        setTimeout(() => {
+            console.log('Async refresh operation has ended');
+            refresher.complete();
+        }, 2000);
+    } 
+    */
+
+
     fetchListOnline() {
 
      this.listService.getList().subscribe(data => {
             this.places = data;
             console.log(data);
         });
+    }
+
+    refreshList() {
+        this.presentLoading();
+        this.fetchListOnline();
     }
 
 
@@ -94,13 +107,13 @@ export class ListPage {
     */
 
     searchNearbyZip(event) {
-     if(event.target.value.length > 3) {
+     if( event.target.value != null && event.target.value.length > 3) {
             var pin = event.target.value;
             this.listService.searchNearbyZip(event.target.value)
             .subscribe(
                 data => {
 
-                 if(data.postalCodes != undefined){
+                 if(data.postalCodes != null){
                     this.nearbyzips = [];
                     //console.log(data.postalCodes);
                     var len = data.postalCodes.length;
@@ -136,7 +149,7 @@ export class ListPage {
             )
           
       }
-     if(event.target.value.length < 1) {
+     if(event.target.value != null && event.target.value.length < 1) {
             this.listService.getList().subscribe(data => {
             this.places = data;
             console.log('Loading initial view again...');
@@ -147,13 +160,16 @@ export class ListPage {
     itemTapped(event, place) {
         console.log(place);  
         this.navCtrl.push(ListDetailPage, {
-            place: place            
+            place: place,
+            showFavButton: true       
         });
     }
 
   ionViewDidLoad() {
-    console.log('Hello ListPage Page');
+      
   }
+
+//End
 }
 
 

@@ -69,7 +69,7 @@ export class ListService {
         // Set Place
         var favourite_key = placeId;
         
-       this.sql.set(favourite_key, JSON.stringify(place));
+       this.sql.setFav(favourite_key, JSON.stringify(place));
        console.log ('Add Executed...');
     }
 
@@ -78,7 +78,7 @@ export class ListService {
         // Set Place
         var favourite_key = placeId;
         
-       this.sql.remove(favourite_key);
+       this.sql.removeFav(favourite_key);
        console.log ('Remove Executed...');
     }
 

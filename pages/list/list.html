@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title>Welcome to AU</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-right (click)="refreshList()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -15,8 +20,21 @@
 
 <ion-content padding>
     <p>
-      Please find below list of places where you can find in Australia. Search using 4-digits Post Code, ex: 2000
+      Please find below list of places where you can find in Australia. Search using 4-digits Post Code, ex: 2000.      
     </p>
+
+
+  <!-- Pull to Refresh if needed
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">>
+    </ion-refresher-content>
+  </ion-refresher>
+  -->
+
     <ion-searchbar (ionInput)="searchNearbyZip($event)"></ion-searchbar>
     <ion-list>
     <button ion-item *ngFor="let place of places" (click)="itemTapped($event, place)">

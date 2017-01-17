@@ -79,8 +79,10 @@ export class ListPage {
 
 
     fetchListOffline() {
-            this.places = [{"Name": "Netowrk not available. Try again!"}] ;
-
+            this.places = [
+                {"Name": "Ooo...Netowrk not found! Please try again later.",
+                 "Contact": "Well, atleast your favourites are still available! :)"
+                }] ;
     }
 
   /*

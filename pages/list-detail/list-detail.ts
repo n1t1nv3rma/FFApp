@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import {ListService} from '../../services/list.service';
 import {ListFavouritePage} from '../list-favourite/list-favourite';
@@ -16,7 +17,12 @@ export class ListDetailPage {
     showFavButton: Boolean;
     showDelButton: Boolean;
 
-    constructor(private nav: NavController, private navParams: NavParams, private listService: ListService, public alertCtrl: AlertController) {
+    constructor(
+        private nav: NavController, 
+        private navParams: NavParams, 
+        private listService: ListService, 
+        public alertCtrl: AlertController,
+        public toastCtrl: ToastController) {
         this.listService = listService;
         this.nav = nav;
         this.navParams = navParams;
@@ -31,7 +37,29 @@ export class ListDetailPage {
     addFavour(placeId, place){
        this.listService.addFavourPlace(placeId, place);
        console.log('Place added to Favourite...');
+       this.presentAddToast();
+       this.nav.pop();
+    
+    }
+
+    presentAddToast() {
+            let toast = this.toastCtrl.create({
+            message: 'Added to Favourites...',
+            duration: 3000
+            });
+            toast.present();
+    }
+
+    presentDelToast() {
+            let toast = this.toastCtrl.create({
+            message: 'Removed from Favourites...',
+            duration: 3000
+            });
+            toast.present();
+    }
+        
        
+       /*
         let alert = this.alertCtrl.create({
             title: 'Added to favourites',
             buttons: [{
@@ -49,12 +77,12 @@ export class ListDetailPage {
             }]
             });
             alert.present();
-
-    }
+        */
 
     delFavour(placeId){
        this.listService.delFavourPlace(placeId);
        console.log('Place removed from Favourite...');
-       this.nav.setRoot(ListFavouritePage);
+       this.presentAddToast();
+       this.nav.pop();
     }
 }

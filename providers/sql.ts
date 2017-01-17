@@ -10,7 +10,7 @@ export class Sql {
     private _db: any;
 
 constructor(private platform: Platform) {
-  if (this.platform.is('cordova')) {
+  if (this.platform.is('Cordova')) {
    this._db = new SQLite();
    this._db.openDatabase({
      name: DB_NAME,
@@ -64,13 +64,6 @@ constructor(private platform: Platform) {
      * @param {string} key the key
      * @return {Promise} that resolves or rejects with an object of the form { tx: Transaction, res: Result (or err)}
      */
-    get(key: string): Promise<any> {
-        return this.query('select key, value from kv where key = ? limit 1', [key]).then(data => {
-            if (data.res.rows.length > 0) {
-                return data.res.rows.item(0).value;
-            }
-        });
-    }
 
     getFav(key: string): Promise<any> {
         return this.query('select key, value from kv_fav where key = ? limit 1', [key]).then(data => {

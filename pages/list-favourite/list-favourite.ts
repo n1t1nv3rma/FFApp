@@ -17,7 +17,7 @@ export class ListFavouritePage {
     console.log('Hello ListFavouritePage Page');
   }
 
-  ngOnInit(){
+  ionViewDidEnter(){
     this.getFavData();
   }
 

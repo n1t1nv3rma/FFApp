@@ -23,16 +23,12 @@
     </p>
 
 
-  <!-- Pull to Refresh if needed
     <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">>
+      refreshingSpinner="none"
+      >
     </ion-refresher-content>
   </ion-refresher>
-  -->
 
     <ion-searchbar (ionInput)="searchNearbyZip($event)"></ion-searchbar>
     <ion-list>
@@ -41,4 +37,8 @@
       <h3>{{place.Contact}}</h3>
     </button>  
   </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfiniteRefresh($event)">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
 </ion-content>

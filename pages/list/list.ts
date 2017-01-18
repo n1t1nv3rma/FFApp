@@ -18,7 +18,7 @@ import { ConnectivityService } from '../../providers/connectivity-service';
   providers: [ListService]
 })
 export class ListPage {
-   places: Array<any>;
+   places: Array<any> = [];
    nearbyzips: Array<any> = [];
   constructor(
       private navCtrl: NavController,
@@ -26,6 +26,10 @@ export class ListPage {
       private listService: ListService, 
       private sql: Sql, 
       public networkService: ConnectivityService) {
+
+        for (let i = 0; i < 30; i++) {
+        this.places.push( this.places.length );
+        }
      }
   
   ngOnInit(){
@@ -53,16 +57,27 @@ export class ListPage {
         loader.present();
     };
 
-    /* doRefresh(refresher) {
+    doRefresh(refresher) {
         console.log('Begin async refresh operation', refresher);
-
+        this.refreshList();
         setTimeout(() => {
             console.log('Async refresh operation has ended');
             refresher.complete();
         }, 2000);
     } 
-    */
 
+    doInfiniteRefresh(infiniteScroll) {
+        console.log('Begin async Infinite refresh operation');
+
+        setTimeout(() => {
+        for (let i = 0; i < 30; i++) {
+            this.places.push( this.places.length );
+        }
+
+        console.log('Async Infinite refresh operation has ended');
+        infiniteScroll.complete();
+        }, 500);
+    }
 
     fetchListOnline() {
 

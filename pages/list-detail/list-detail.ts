@@ -45,7 +45,8 @@ export class ListDetailPage {
     presentAddToast() {
             let toast = this.toastCtrl.create({
             message: 'Added to Favourites...',
-            duration: 3000
+            duration: 3000,
+            position: 'top'
             });
             toast.present();
     }
@@ -53,7 +54,8 @@ export class ListDetailPage {
     presentDelToast() {
             let toast = this.toastCtrl.create({
             message: 'Removed from Favourites...',
-            duration: 3000
+            duration: 3000,
+            position: 'top'
             });
             toast.present();
     }
@@ -82,7 +84,7 @@ export class ListDetailPage {
     delFavour(placeId){
        this.listService.delFavourPlace(placeId);
        console.log('Place removed from Favourite...');
-       this.presentAddToast();
+       this.presentDelToast();
        this.nav.pop();
     }
 }

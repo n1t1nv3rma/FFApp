@@ -15,25 +15,43 @@
 
 <ion-content class="page-list-detail">
 <ion-card>
-        <ion-card-header>
+        <ion-card-header color="primary">
             <strong>{{place.Name}}</strong>
         </ion-card-header>
         <ion-card-content>
-          <p><strong>Address1: </strong> {{place.Address1}}</p>
-          <p><strong>Address2: </strong> {{place.Address2}}</p>
-          <p><strong>Suburb: </strong> {{place.Suburb}}</p>
-          <p><strong>State: </strong> {{place.State}}</p>
-          <p><strong>Post Code: </strong> {{place.Pin}}</p>
-          <p><strong>Contact: </strong> {{place.Contact}}</p>
-          <p><strong>URL: </strong> {{place.URL}}</p>
-          <p><strong>Service Hours: </strong></p>
-          <p><strong>Monday: </strong> {{place.Days.Monday}}</p>
-          <p><strong>Tuesday: </strong> {{place.Days.Tuesday}}</p>
-          <p><strong>Wednesday: </strong> {{place.Days.Wednesday}}</p>
-          <p><strong>Thursday: </strong> {{place.Days.Thursday}}</p>
-          <p><strong>Friday: </strong> {{place.Days.Friday}}</p>
-          <p><strong>Saturday: </strong> {{place.Days.Saturday}}</p>
-          <p><strong>Sunday: </strong> {{place.Days.Sunday}}</p>
+          <ion-grid text-left>
+          <ion-row>
+          <ion-col width-30 class="bold">Address1: </ion-col><ion-col width-70> {{place.Address1}}</ion-col>
+          </ion-row><ion-row>
+          <ion-col width-30 class="bold">Address2: </ion-col><ion-col width-70> {{place.Address2}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Suburb: </ion-col><ion-col width-70> {{place.Suburb}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">State: </ion-col><ion-col width-70> {{place.State}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Post Code: </ion-col><ion-col width-70> {{place.Pin}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Contact: </ion-col><ion-col width-70> {{place.Contact}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">URL: </ion-col><ion-col width-70> {{place.URL}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Service Hours: </ion-col><ion-col width-70></ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Monday: </ion-col><ion-col width-70> {{place.Days.Monday}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Tuesday: </ion-col><ion-col width-70> {{place.Days.Tuesday}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Wednesday: </ion-col><ion-col width-70> {{place.Days.Wednesday}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Thursday: </ion-col><ion-col width-70> {{place.Days.Thursday}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Friday: </ion-col><ion-col width-70> {{place.Days.Friday}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Saturday: </ion-col><ion-col width-70> {{place.Days.Saturday}}</ion-col>
+          </ion-row><ion-row>
+            <ion-col width-30 class="bold">Sunday: </ion-col><ion-col width-70> {{place.Days.Sunday}}</ion-col>
+          </ion-row>
+          </ion-grid>
           <hr>
           <button ion-button block color="secondary" *ngIf="showFavButton" (click)="addFavour(place._id.$oid, place)"> Add to Favourites</button>
           <button ion-button block color="danger" *ngIf="showDelButton" (click)="delFavour(place._id.$oid)"> Remove from Favourites</button>

@@ -48,11 +48,20 @@ export class ListPage {
         //})
   }
 
-    presentLoading(){
+   presentLoading(){
         let loader = this.loadingCtrl.create({
             content: "Fetching latest data...",
             dismissOnPageChange: true,
             duration: 3000
+        });
+        loader.present();
+    };
+
+    presentSearchLoading(){
+        let loader = this.loadingCtrl.create({
+            content: "Searching places...",
+            dismissOnPageChange: true,
+            duration: 4000
         });
         loader.present();
     };
@@ -70,7 +79,7 @@ export class ListPage {
         console.log('Begin async Infinite refresh operation');
 
         setTimeout(() => {
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 10; i++) {
             this.places.push( this.places.length );
         }
 
@@ -125,6 +134,7 @@ export class ListPage {
 
     searchNearbyZip(event) {
      if( event.target.value != null && event.target.value.length > 3) {
+            this.presentSearchLoading();
             var pin = event.target.value;
             this.listService.searchNearbyZip(event.target.value)
             .subscribe(

@@ -7,10 +7,11 @@
 <ion-header>
 
   <ion-navbar color="my-colour">
-    <ion-title color="primary">The App </ion-title>
+    <ion-title color="primary" class="mycenter">Food Charity<br> 
+    <div class="mysmall"> Where hunger meets food! </div></ion-title>
     <ion-buttons end>
       <button ion-button icon-right (click)="refreshList()">
-        <ion-icon name="refresh" color="primary"></ion-icon>
+        <ion-icon name="refresh" color="primary" class="mybig"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -19,7 +20,7 @@
 
 <ion-content padding>
     <p>
-      Please find below list of places where you can find in Australia. Search using 4-digits Post Code, ex: 2000.      
+      Please find below list of places where you can find Food as Charity in Australia. Search using 4-digits Post Code within 5KM radius, ex: 2000.      
     </p>
 
 
@@ -34,7 +35,7 @@
     <ion-list>
     <button ion-item *ngFor="let place of places" (click)="itemTapped($event, place)">
       <h2>{{place.Name}}</h2>
-      <h3>{{place.Contact}}</h3>
+      <h3>{{place.Suburb}},{{place.State}}</h3>
     </button>  
   </ion-list>
 

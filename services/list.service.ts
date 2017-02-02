@@ -27,7 +27,7 @@ export class ListService {
 
     getList(){
         
-        return this.http.get(this.placelistUrl+'?apiKey='+this.apiKey)
+        return this.http.get(this.placelistUrl+'?apiKey='+this.apiKey+'&s={"Pin":1}')
             .map(res => res.json());
     }
 

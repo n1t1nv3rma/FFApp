@@ -5,14 +5,46 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar color="my-colour"> 
-    <ion-title>Birthday Freebies</ion-title>
+  
+  <ion-navbar color="my-colour">
+    <ion-title> 
+      <ion-grid text-left>
+          <ion-row>
+          <ion-col width-20><img src="assets/img/AU-Flag-Map.png"></ion-col>
+          <ion-col width-80> Birthday Freebies! </ion-col>
+          </ion-row>
+      </ion-grid> 
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-right (click)="refreshList()">
+        <ion-icon name="refresh" color="primary" class="mybig"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-Here you can find list
+<p> Birthday today? God has made everyone special, so are some of the food outlets and places in Australia, who makes you feel even more special by providing you with <b>free stuff and/or deals!</b>
+
+<p> Simply search such places using 4-digits Post Code within 5KM radius, ex: 2000... and enjoy!
+
+<ion-searchbar (ionInput)="searchNearbyZip($event)"></ion-searchbar>
+    <ion-list>
+    <button ion-item *ngFor="let place of places" (click)="openModal(place)">
+      <h2>{{place.Name}}</h2>
+      <h3>{{place.Contact}},{{place.Suburb}},{{place.State}}</h3>
+    </button>
+  </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <div class="mysmall"> 
+        Happy Birthday - From: The Food Charity Team 
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

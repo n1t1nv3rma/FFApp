@@ -6,12 +6,6 @@ import {ListDetailPage} from '../list-detail/list-detail';
 import { Sql } from '../../providers/sql';
 import { ConnectivityService } from '../../providers/connectivity-service';
 
-/*
-  Generated class for the List page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html',
@@ -27,9 +21,11 @@ export class ListPage {
       private sql: Sql, 
       public networkService: ConnectivityService) {
 
+       /* infiniteScroll
         for (let i = 0; i < 30; i++) {
         this.places.push( this.places.length );
         }
+        */
      }
   
   ngOnInit(){
@@ -75,7 +71,7 @@ export class ListPage {
         }, 2000);
     } 
 
-    doInfiniteRefresh(infiniteScroll) {
+   /* doInfiniteRefresh(infiniteScroll) {
         console.log('Begin async Infinite refresh operation');
 
         setTimeout(() => {
@@ -87,6 +83,7 @@ export class ListPage {
         infiniteScroll.complete();
         }, 500);
     }
+    */
 
     fetchListOnline() {
 
@@ -104,33 +101,10 @@ export class ListPage {
 
     fetchListOffline() {
             this.places = [
-                {"Name": "Ooo...Netowrk not found! Please try again later.",
-                 "Contact": "Well, atleast your favourites are still available! :)"
+                {"Name": "Ooo...Network not found! Please try again later.",
+                 "Suburb": "Well, atleast your favourites are still available! :)"
                 }] ;
     }
-
-  /*
-  searchPlaces(event) {
-     if(event.target.value.length > 3) {
-            this.listService.searchPlace(event.target.value).subscribe(
-                data => {
-                    this.places = data; 
-                    console.log('Searched data' + data);
-                },
-                err => {
-                    console.log(err);
-                },
-                () => console.log('Place Search Complete')
-            );
-      }
-     if(event.target.value.length < 1) {
-            this.listService.getList().subscribe(data => {
-            this.places = data;
-            console.log('Loading initial view again...');
-        });
-      }
-    }
-    */
 
     searchNearbyZip(event) {
      if( event.target.value != null && event.target.value.length > 3) {
@@ -166,7 +140,7 @@ export class ListPage {
 
                   } // if end here
                   else {
-                    this.places = [{"Name": "Bad Pin Code. Try again!"}] ;
+                    this.places = [{"Name": "Invalid Pin Code. Try again!"}] ;
                   }
                 },
                 err => {

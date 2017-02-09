@@ -9,8 +9,8 @@ import { ListPage } from '../pages/list/list';
 import { ListDetailPage } from '../pages/list-detail/list-detail';
 // import { AddListPage } from '../pages/add-list/add-list';
 import { ListFavouritePage } from '../pages/list-favourite/list-favourite';
-import { ListBirthdayPage } from '../pages/list-birthday/list-birthday';
-
+import { ListBirthdayPage, ModalContentPage } from '../pages/list-birthday/list-birthday';
+// import { ListBirthdayDetailPage } from '../pages/list-birthday/list-birthday-detail';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { ListBirthdayPage } from '../pages/list-birthday/list-birthday';
     ListPage,
     ListDetailPage,
     ListFavouritePage,
-    ListBirthdayPage
+    ListBirthdayPage,
+    ModalContentPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -32,8 +33,9 @@ import { ListBirthdayPage } from '../pages/list-birthday/list-birthday';
     AboutPage,
     ListPage,
     ListDetailPage,
-    ListFavouritePage,
-    ListBirthdayPage
+    ListFavouritePage,    
+    ListBirthdayPage,
+    ModalContentPage
   ],
   providers: [
     Sql, 

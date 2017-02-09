@@ -7,8 +7,14 @@
 <ion-header>
 
   <ion-navbar color="my-colour">
-    <ion-title color="primary" class="mycenter">Food Charity<br> 
-    <div class="mysmall"> Where hunger meets food! </div></ion-title>
+    <ion-title> 
+      <ion-grid text-left>
+          <ion-row>
+          <ion-col width-20><img src="assets/img/AU-Flag-Map.png"></ion-col>
+          <ion-col width-80> Food Charity<br> <div class="mysmall"> Where hunger meets food! </div> </ion-col>
+          </ion-row>
+      </ion-grid> 
+    </ion-title>
     <ion-buttons end>
       <button ion-button icon-right (click)="refreshList()">
         <ion-icon name="refresh" color="primary" class="mybig"></ion-icon>
@@ -39,7 +45,10 @@
     </button>  
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="doInfiniteRefresh($event)">
+  <!-- 
+    <ion-infinite-scroll (ionInfinite)="doInfiniteRefresh($event)">
    <ion-infinite-scroll-content></ion-infinite-scroll-content>
  </ion-infinite-scroll>
+   -->
+
 </ion-content>

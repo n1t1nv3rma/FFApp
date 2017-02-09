@@ -11,6 +11,7 @@ export class ListService {
     }
     apiKey: String = "";
     placelistUrl: String = "";
+    birthdayListUrl: String = "";
     findNearbyPinCodesUrl: String = "";
     nearbyPinCodesObj: {};
     nearbyPinCodes: Array<any> = [];
@@ -21,6 +22,7 @@ export class ListService {
         this.sql = sql;
         this.apiKey = 'Puq-dedW5BFQ6DWqjwftidlcpJB3EYAV';
         this.placelistUrl = 'https://api.mlab.com/api/1/databases/myworkapp/collections/placelist';
+        this.birthdayListUrl = 'https://api.mlab.com/api/1/databases/myworkapp/collections/placelist';
         this.findNearbyPinCodesUrl = 'http://api.geonames.org/findNearbyPostalCodesJSON?country=AU&radius=5&username=ffapp&maxRows=20&style=short';
         //postalcode=2768;
     }
@@ -28,6 +30,12 @@ export class ListService {
     getList(){
         
         return this.http.get(this.placelistUrl+'?apiKey='+this.apiKey+'&s={"Pin":1}')
+            .map(res => res.json());
+    }
+
+    getBirthdayList(){
+        
+        return this.http.get(this.birthdayListUrl+'?apiKey='+this.apiKey+'&s={"Pin":1}')
             .map(res => res.json());
     }
 
@@ -41,6 +49,22 @@ export class ListService {
         // log url
         console.log(this.placelistUrl + '?q={$or:[{"Pin":' + pin + query +'}]}&apiKey='+this.apiKey);
         var response = this.http.get(this.placelistUrl + '?q={$or:[{"Pin":' + pin + query +'}]}&apiKey='+this.apiKey)
+        .map(res => res.json());
+        
+        // OR q={$or:[{"Pin":2768},{"Pin:2212}]}
+        return response;
+    }
+
+    searchBirthdayPlace(pin, zips) {
+        var query: String = "";
+        for (var j = 0; j < zips.length; j++){
+            query = query + '},{"Pin":' + zips[j];
+            //console.log(query);
+        }
+        //console.log(query);
+        // log url
+        console.log(this.birthdayListUrl + '?q={$or:[{"Pin":' + pin + query +'}]}&apiKey='+this.apiKey);
+        var response = this.http.get(this.birthdayListUrl + '?q={$or:[{"Pin":' + pin + query +'}]}&apiKey='+this.apiKey)
         .map(res => res.json());
         
         // OR q={$or:[{"Pin":2768},{"Pin:2212}]}
